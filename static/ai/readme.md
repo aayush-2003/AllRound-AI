@@ -1,0 +1,1 @@
+chatgpt API KEY = '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'

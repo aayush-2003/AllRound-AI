@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>GEN AI</title>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="icon" type="image/x-icon" href="ai/images/chat-bot.png">
+
+</head>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<body>
+  <!-- partial:index.partial.html -->
+  <html lang="en">
+
+  <head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  </head>
+
+  <body>
+    <div id="form">
+      <div class="container">
+        <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-md-8 col-md-offset-2">
+          <div id="userform">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li class="active"><a href="#signup" role="tab" data-toggle="tab">Sign up</a></li>
+              <li><a href="#login" role="tab" data-toggle="tab">Log in</a></li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane fade active in" id="signup">
+                <h2 class="text-uppercase text-center"> Sign Up for Free</h2>
+                <!-- ****************************************************************** -->
+                <!--                          SIGN UP PAGE                              -->
+                <!-- ****************************************************************** -->
+                <form id="signup">
+                  <div class="row">
+                    <div class="col-xs-12 col-sm-6">
+                      <div class="form-group">
+                        <label>First Name<span class="req">*</span> </label>
+                        <input type="text" class="form-control" id="first_name" required
+                          data-validation-required-message="Please enter your name." autocomplete="off">
+                        <p class="help-block text-danger"></p>
+                      </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                      <div class="form-group">
+                        <label> Last Name<span class="req">*</span> </label>
+                        <input type="text" class="form-control" id="last_name" required
+                          data-validation-required-message="Please enter your name." autocomplete="off">
+                        <p class="help-block text-danger"></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label> Your Email<span class="req">*</span> </label>
+                    <input type="email" class="form-control" id="email" required
+                      data-validation-required-message="Please enter your email address." autocomplete="off">
+                    <p class="help-block text-danger"></p>
+                  </div>
+                  <div class="form-group">
+                    <label> Your Phone<span class="req">*</span> </label>
+                    <input type="tel" class="form-control" id="phone" required
+                      data-validation-required-message="Please enter your phone number." autocomplete="off">
+                    <p class="help-block text-danger"></p>
+                  </div>
+                  <div class="form-group">
+                    <label> Password<span class="req">*</span> </label>
+                    <input type="password" class="form-control" id="password" required
+                      data-validation-required-message="Please enter your password" autocomplete="off">
+                    <p class="help-block text-danger"></p>
+                  </div>
+                  <div class="mrgn-30-top">
+                    <button type="submit" class="btn btn-larger btn-block" onclick="signup()">
+                      Sign up
+                    </button>
+                  </div>
+                </form>
+
+              </div>
+              <div class="tab-pane fade in" id="login">
+                <h2 class="text-uppercase text-center"> Log in</h2>
+                <!-- ****************************************************************** -->
+                <!--                          LOGIN PAGE                                -->
+                <!-- ****************************************************************** -->
+                <form id="login">
+                  <div class="form-group">
+                    <label> Your Email<span class="req">*</span> </label>
+                    <input type="email" class="form-control" id="emailLog" required
+                      data-validation-required-message="Please enter your email address." autocomplete="off">
+                    <p class="help-block text-danger"></p>
+                  </div>
+                  <div class="form-group">
+                    <label> Password<span class="req">*</span> </label>
+                    <input type="password" class="form-control" id="passwordLog" required
+                      data-validation-required-message="Please enter your password" autocomplete="off">
+                    <p class="help-block text-danger"></p>
+                  </div>
+                  <!-- <div class="form-group"> -->
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input" id="rememberMe">
+                      <label class="form-check-label" for="rememberMe">Remember me</label>
+                    </div>
+                  <!-- </div> -->
+                  <div class="mrgn-30-top">
+                    <button type="submit" class="btn btn-larger btn-block" onclick="login()">
+                      Log in
+                    </button>
+                  </div>
+                </form>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.container -->
+    </div>
+
+  </body>
+  <!-- partial -->
+  <script src="./script.js"></script>
+  <script>
+    const regForm = document.getElementById('signup')
+    const loginForm = document.getElementById('login')
+  
+    regForm.addEventListener('submit', regesterUser)
+  
+    async function regesterUser(event) {
+      event.preventDefault()
+  
+      const firstName = document.getElementById('first_name').value
+      const lastName = document.getElementById('last_name').value
+      const email = document.getElementById('email').value
+      const phone_number = document.getElementById('phone').value
+      const password = document.getElementById('password').value
+  
+      const result = await fetch('/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          firstName, lastName, email, phone_number, password
+        })
+      }).then((res) => res.json())
+      console.log(result)
+      if (result.status === 'ok') {
+        //all good
+        window.location.href = '/ai/index.html'
+      }
+      else {
+        alert(result.error)
+      }
+    }
+  
+    loginForm.addEventListener('submit', login)
+    async function login(event) {
+      event.preventDefault()
+  
+      const email = document.getElementById('emailLog').value
+      const password = document.getElementById('passwordLog').value
+      const rememberMe = document.getElementById('rememberMe').checked
+  
+      const result = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email, password, rememberMe
+        })
+      }).then((res) => res.json())
+      if (result.status === 'ok') {
+        console.log('Redirecting...');
+        window.location.href = '/ai/index.html'
+      }
+      else {
+        alert(result.error)
+      }
+    }
+    window.onload = function() {
+    fetch('/api/check-login')
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'ok') {
+          window.location.href = '/ai/index.html';
+        }
+      });
+  };
+  </script>
+</body>
+
+</html>
