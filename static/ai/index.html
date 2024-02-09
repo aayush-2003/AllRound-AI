@@ -4,17 +4,20 @@
 <head>
   <meta charset="utf-8">
   <title>ALLRound AI</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/static/ai/style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Google Fonts Link For Icons -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-  <script src="script.js" defer></script>
+  <script src="/static/ai/script.js" defer></script>
 </head>
 
 <body>
   <!-- Chats container -->
+  <!-- Logout button -->
+  <div class="logout-button" onclick="location.href='/api/logout'">Logout</div>
   <div class="chat-container"></div>
-
+  
   <!-- Typing container -->
   <div class="typing-container">
     <div class="typing-content">
@@ -23,20 +26,44 @@
         <textarea id="chat-input" spellcheck="false" placeholder="Enter a prompt here" required></textarea>
         <span id="send-btn" class="material-symbols-rounded">send</span>
         <!-- Added dropdown for result type with default option ALL -->
-        <select id="result-type">
-          <option value="all" selected>All</option>
-          <option value="text">Text</option>
-          <option value="video">Video</option>
-          <option value="image">Image</option>
-          <option value="link">Reference Link</option>
-        </select>
+        
       </div>
-      <div class="typing-controls">
-        <span id="theme-btn" class="material-symbols-rounded">light_mode</span>
-        <span id="delete-btn" class="material-symbols-rounded">delete</span>
-      </div>
+       
+        <div class="typing-controls">
+          <span id="theme-btn" class="material-symbols-rounded">light_mode</span>
+          <span id="delete-btn" class="material-symbols-rounded">delete</span>
+        </div>
+
+        <div class="dropdown" data-control="checkbox-dropdown" id="result-type">
+          <label class="dropdown-label">Select</label>
+          
+          <div class="dropdown-list">
+            <a href="#" data-toggle="check-all" class="dropdown-option">Check All</a>
+            
+            <label class="dropdown-option">
+              <input type="checkbox" name="dropdown-group" value="text" />
+              Text
+            </label>
+            
+            <label class="dropdown-option">
+              <input type="checkbox" name="dropdown-group" value="video" />
+              Video
+            </label>
+            
+            <label class="dropdown-option">
+              <input type="checkbox" name="dropdown-group" value="image" />
+              Image
+            </label>
+            
+            <label class="dropdown-option">
+              <input type="checkbox" name="dropdown-group" value="link" />
+              Reference Link
+            </label>
+            
+          </div>
+        </div>
+      
     </div>
   </div>
-
 </body>
 </html>
