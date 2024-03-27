@@ -22,10 +22,13 @@
   </head>
 
   <body>
+    <img src="http://localhost:443/static/allround-ai-high-resolution-logo-transparent.png" alt="Logo" class="logo-img">
     <div id="form">
+
       <div class="container">
         <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-md-8 col-md-offset-2">
           <div id="userform">
+
             <ul class="nav nav-tabs nav-justified" role="tablist">
               <li class="active"><a href="#signup" role="tab" data-toggle="tab">Sign up</a></li>
               <li><a href="#login" role="tab" data-toggle="tab">Log in</a></li>
@@ -100,10 +103,10 @@
                     <p class="help-block text-danger"></p>
                   </div>
                   <!-- <div class="form-group"> -->
-                    <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="rememberMe">
-                      <label class="form-check-label" for="rememberMe">Remember me</label>
-                    </div>
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="rememberMe">
+                    <label class="form-check-label" for="rememberMe">Remember me</label>
+                  </div>
                   <!-- </div> -->
                   <div class="mrgn-30-top">
                     <button type="submit" class="btn btn-larger btn-block" onclick="login()">
@@ -126,18 +129,18 @@
   <script>
     const regForm = document.getElementById('signup')
     const loginForm = document.getElementById('login')
-  
+
     regForm.addEventListener('submit', regesterUser)
-  
+
     async function regesterUser(event) {
       event.preventDefault()
-  
+
       const firstName = document.getElementById('first_name').value
       const lastName = document.getElementById('last_name').value
       const email = document.getElementById('email').value
       const phone_number = document.getElementById('phone').value
       const password = document.getElementById('password').value
-  
+
       const result = await fetch('/api/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -154,15 +157,15 @@
         alert(result.error)
       }
     }
-  
+
     loginForm.addEventListener('submit', login)
     async function login(event) {
       event.preventDefault()
-  
+
       const email = document.getElementById('emailLog').value
       const password = document.getElementById('passwordLog').value
       const rememberMe = document.getElementById('rememberMe').checked
-  
+
       const result = await fetch('/api/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -178,15 +181,15 @@
         alert(result.error)
       }
     }
-    window.onload = function() {
-    fetch('/api/check-login')
-      .then(response => response.json())
-      .then(data => {
-        if (data.status === 'ok') {
-          window.location.href = '/ai/index.html';
-        }
-      });
-  };
+    window.onload = function () {
+      fetch('/api/check-login')
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === 'ok') {
+            window.location.href = '/ai/index.html';
+          }
+        });
+    };
   </script>
 </body>
 
