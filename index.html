@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graph Display</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <canvas id="myChart"></canvas>
+    <canvas id="selectionChart"></canvas>
+
+    <script>
+        async function fetchData() {
+            try {
+                const response = await fetch('http://localhost:3000/api/getData');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch data');
+                }
+                const data = await response.json();
+                // Assuming each item in data has a 'selectionCounts' field that is an array of counts for each option
+                return data;
+            } catch (error) {
+                console.error('Error fetching data:', error.message);
+                return null;
+            }
+        }
+
+        async function createGraph() {
+            const data = await fetchData();
+            if (!data) {
+                console.error('No data fetched. Cannot create graph.');
+                return;
+            }
+
+            try {
+                const prompts = data.map(item => item.prompt);
+                const optionsCount = data.map(item => item.promptOptions.length);
+
+                const ctx = document.getElementById('myChart').getContext('2d');
+                const myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: prompts,
+                        datasets: [{
+                            label: 'Number of Options',
+                            data: optionsCount,
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            } catch (error) {
+                console.error('Error creating graph:', error.message);
+            }
+        }
+
+        function countOptionSelections(data) {
+            const optionCounts = {};
+            data.forEach(item => {
+                item.promptOptions.forEach(option => {
+                    if (!optionCounts[option]) {
+                        optionCounts[option] = 0;
+                    }
+                    optionCounts[option]++;
+                });
+            });
+            return optionCounts;
+        }
+
+        async function createSelectionGraph() {
+            const data = await fetchData();
+            if (!data) {
+                console.error('No data fetched. Cannot create selection graph.');
+                return;
+            }
+
+            const optionCounts = countOptionSelections(data);
+            const options = Object.keys(optionCounts);
+            const counts = Object.values(optionCounts);
+
+            const ctx = document.getElementById('selectionChart').getContext('2d');
+            const selectionChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: options,
+                    datasets: [{
+                        label: 'Selection Counts',
+                        data: counts,
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        createGraph();
+        createSelectionGraph();
+    </script>
+
+</body>
+
+</html>
