@@ -41,3 +41,12 @@ Fig 3.4
 
 ## based on this option we can give user best experience to browse, solve the problem without jumping between one platform to another to solve their problem.
 
+## Developer Analysis for calculating cost of the APIs and frequent asked prompts
+fig 4.1
+![image](https://github.com/MihirShah07/AI/assets/92981484/1c22a1af-dffd-4c2e-a26d-f72a0558653e)
+
+fig 4.2
+![image](https://github.com/MihirShah07/AI/assets/92981484/8cec74c5-a9aa-4083-8f1f-bbc2cafdee64)
+
+fig 4.3
+![image](https://github.com/MihirShah07/AI/assets/92981484/3af6cadf-a973-4001-b913-cb7f8adba970)
