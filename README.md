@@ -1,4 +1,4 @@
-# STUDY AI
+# ALl ROUND AI
 
 ## Key Functions
 Prompt OUTPUT Based on
