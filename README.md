@@ -13,7 +13,7 @@ Fig 1.1
 
 ### Home Page
 fig 2.1
-![image](https://github.com/MihirShah07/AI/assets/92981484/ee21b14e-9cdb-47ac-bdb5-15fb3919c0aa)
+![image](https://github.com/MihirShah07/AI/assets/92981484/a3db2d19-94bf-46a1-a9e2-5a24ff1c911d)
 
 fig 2.2 get the result
 ![image](https://github.com/MihirShah07/AI/assets/92981484/511064b9-36e4-4bf0-adc3-008b8058ce03)
